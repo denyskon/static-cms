@@ -41,15 +41,12 @@ export default function useMediaFiles(field?: MediaField, currentFolder?: string
     let alive = true;
 
     const getMediaFiles = async () => {
-      const { media_folder, public_folder } = config ?? {};
+      if (entry.mediaFiles.find(f => dirname(f.path) == currentFolder)?.draft) {
+        setCurrentFolderMediaFiles([]);
+        return;
+      }
       const backend = currentBackend(config);
-      const files = await backend.getMedia(
-        currentFolder,
-        folderSupport,
-        public_folder
-          ? trim(currentFolder, '/').replace(trim(media_folder, '/'), public_folder)
-          : currentFolder,
-      );
+      const files = await backend.getMedia(currentFolder, folderSupport);
 
       if (alive) {
         setCurrentFolderMediaFiles(files);
