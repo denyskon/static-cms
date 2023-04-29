@@ -11,7 +11,7 @@ interface TableCellProps {
 
 const TableCell = ({ columns, children }: TableCellProps) => {
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg border border-slate-200 dark:border-gray-700">
+    <div className="relative overflow-x-auto shadow-md rounded-lg border border-slate-200 dark:border-gray-700">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-300 ">
         <thead className="text-xs text-gray-700 bg-gray-100 dark:bg-slate-700 dark:text-gray-300">
           <tr>

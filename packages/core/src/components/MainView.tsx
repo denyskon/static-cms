@@ -1,7 +1,9 @@
 import React from 'react';
+import { useMediaQuery } from 'react-responsive';
 import TopBarProgress from 'react-topbar-progress-indicator';
 
 import classNames from '../lib/util/classNames.util';
+import Fab from './navbar/Fab';
 import Navbar from './navbar/Navbar';
 import Sidebar from './navbar/Sidebar';
 
@@ -36,18 +38,21 @@ const MainView = ({
   noScroll = false,
   navbarActions,
 }: MainViewProps) => {
+  const isMobile = useMediaQuery({ maxWidth: 640 });
+
   return (
     <>
       <Navbar
         breadcrumbs={breadcrumbs}
         showQuickCreate={showQuickCreate}
         navbarActions={navbarActions}
+        showSidebarToggle={showLeftNav && isMobile}
       />
       <div className="flex bg-slate-50 dark:bg-slate-900">
-        {showLeftNav ? <Sidebar /> : null}
+        {showLeftNav && !isMobile ? <Sidebar /> : null}
         <div
           className={classNames(
-            showLeftNav ? 'w-main left-64' : 'w-full',
+            showLeftNav && !isMobile ? 'w-main left-64' : 'w-full',
             !noMargin && 'px-5 py-4',
             noScroll ? 'overflow-hidden' : 'overflow-y-auto',
             `
@@ -59,6 +64,7 @@ const MainView = ({
         >
           {children}
         </div>
+        {isMobile && showQuickCreate ? <Fab /> : null}
       </div>
     </>
   );

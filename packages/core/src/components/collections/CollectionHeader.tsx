@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { translate } from 'react-polyglot';
+import { useMediaQuery } from 'react-responsive';
 import { useParams } from 'react-router-dom';
 
 import useEntries from '@staticcms/core/lib/hooks/useEntries';
@@ -24,6 +25,8 @@ const CollectionHeader = ({
   newEntryUrl,
   t,
 }: TranslatedProps<CollectionHeaderProps>) => {
+  const isMobile = useMediaQuery({ maxWidth: 640 });
+
   const collectionLabel = collection.label;
   const collectionLabelSingular = collection.label_singular;
 
@@ -66,7 +69,7 @@ const CollectionHeader = ({
   return (
     <>
       <div className="flex flex-grow gap-4">
-        <h2
+        {!isMobile ? (<h2
           className="
             text-xl
             font-semibold
@@ -79,8 +82,8 @@ const CollectionHeader = ({
         >
           <div className="flex items-center">{icon}</div>
           {pluralLabel}
-        </h2>
-        {newEntryUrl ? (
+        </h2>) : null}
+        {newEntryUrl && !isMobile ? (
           <Button to={newEntryUrl}>
             {t('collection.collectionTop.newButton', {
               collectionLabel: collectionLabelSingular || pluralLabel,
