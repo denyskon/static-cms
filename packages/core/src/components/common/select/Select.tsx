@@ -159,7 +159,7 @@ const Select = forwardRef(
                 ring-black
                 ring-opacity-5
                 focus:outline-none
-                sm:text-sm
+                text-sm
                 z-50
                 dark:bg-slate-700
               `,

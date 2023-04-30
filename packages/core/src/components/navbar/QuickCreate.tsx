@@ -1,5 +1,5 @@
 import { Add as AddIcon } from '@styled-icons/material/Add';
-import React, { useMemo } from 'react';
+import React, { ComponentType, useMemo } from 'react';
 import { translate } from 'react-polyglot';
 
 import { getNewEntryUrl } from '@staticcms/core/lib/urlHelper';
@@ -9,9 +9,13 @@ import Menu from '../common/menu/Menu';
 import MenuItemLink from '../common/menu/MenuItemLink';
 import MenuGroup from '../common/menu/MenuGroup';
 
-import type { TranslateProps } from 'react-polyglot';
+import { TranslatedProps } from '@staticcms/core/interface';
 
-const QuickCreate = ({ t }: TranslateProps) => {
+export interface QuickCreateProps {
+  isMobile?: boolean;
+}
+
+const QuickCreate = ({ isMobile = false, t }: TranslatedProps<QuickCreateProps>) => {
   const collections = useAppSelector(selectCollections);
 
   const createableCollections = useMemo(
@@ -23,7 +27,7 @@ const QuickCreate = ({ t }: TranslateProps) => {
   );
 
   return (
-    <Menu label={t('app.header.quickAdd')} startIcon={AddIcon}>
+    <Menu label={!isMobile ? t('app.header.quickAdd') : null} startIcon={AddIcon} variant={isMobile ? 'text' : 'contained'} hideDropdownIcon={isMobile}>
       <MenuGroup>
         {createableCollections.map(collection => (
           <MenuItemLink key={collection.name} href={getNewEntryUrl(collection.name)}>
@@ -35,4 +39,4 @@ const QuickCreate = ({ t }: TranslateProps) => {
   );
 };
 
-export default translate()(QuickCreate);
+export default translate()(QuickCreate) as ComponentType<QuickCreateProps>;

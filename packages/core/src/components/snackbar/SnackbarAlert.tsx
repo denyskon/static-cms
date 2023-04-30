@@ -48,7 +48,6 @@ const SnackbarAlert = forwardRef<HTMLDivElement, TranslatedProps<SnackbarAlertPr
         className="
           flex
           items-center
-          w-full
           max-w-xs
           gap-3
           py-2

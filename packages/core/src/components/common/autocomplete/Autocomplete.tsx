@@ -149,7 +149,7 @@ const Autocomplete = function <T>(
                 ring-black
                 ring-opacity-5
                 focus:outline-none
-                sm:text-sm
+                text-sm
                 z-30
                 dark:bg-slate-700
               `}

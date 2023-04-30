@@ -15,6 +15,7 @@ import NavLink from './NavLink';
 
 import type { Collection } from '@staticcms/core/interface';
 import type { FC } from 'react';
+
 import type { TranslateProps } from 'react-polyglot';
 
 const Sidebar: FC<TranslateProps> = ({ t }) => {
@@ -96,9 +97,10 @@ const Sidebar: FC<TranslateProps> = ({ t }) => {
 
   return (
     <aside
+      id='sidebar'
       className={classNames(
         'w-sidebar-expanded',
-        'h-main sm:fixed sm:z-20 sm:shadow-sidebar lg:block lg:z-auto lg:shadow-none',
+        'h-main-mobile sm:h-main hidden sm:block fixed z-30 shadow-sidebar lg:block lg:z-auto lg:shadow-none',
       )}
       aria-label="Sidebar"
     >

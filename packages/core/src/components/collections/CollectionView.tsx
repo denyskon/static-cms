@@ -38,6 +38,7 @@ import type {
 import type { RootState } from '@staticcms/core/store';
 import type { ComponentType } from 'react';
 import type { ConnectedProps } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 
 const CollectionView = ({
   collection,
@@ -60,6 +61,8 @@ const CollectionView = ({
   changeViewStyle,
   viewStyle,
 }: TranslatedProps<CollectionViewProps>) => {
+  const isMobile = useMediaQuery({ maxWidth: 640 });
+
   const [readyToLoad, setReadyToLoad] = useState(false);
   const [prevCollection, setPrevCollection] = useState<Collection | null>();
 
@@ -207,7 +210,7 @@ const CollectionView = ({
           </>
         ) : (
           <>
-            <CollectionHeader collection={collection} newEntryUrl={newEntryUrl} />
+            {!isMobile ? <CollectionHeader collection={collection} newEntryUrl={newEntryUrl} /> : null}
             <CollectionControls
               viewStyle={viewStyle}
               onChangeViewStyle={changeViewStyle}

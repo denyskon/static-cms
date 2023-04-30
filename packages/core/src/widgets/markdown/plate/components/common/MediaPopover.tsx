@@ -96,7 +96,7 @@ const MediaPopover = <T extends FileOrImageField | MarkdownField>({
         ring-black
         ring-opacity-5
         focus:outline-none
-        sm:text-sm
+        text-sm
         z-40
         dark:bg-slate-700
       "

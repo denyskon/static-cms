@@ -76,7 +76,7 @@ const Menu = ({
           className={menuButtonClassNames}
           disabled={disabled}
         >
-          {StartIcon ? <StartIcon className="-ml-0.5 mr-1.5 h-5 w-5" /> : null}
+          {StartIcon ? <StartIcon className={classNames("-ml-0.5 h-5 w-5", label ? "mr-1.5" : null)}  /> : null}
           {label}
           {!hideDropdownIcon ? (
             <KeyboardArrowDownIcon className="-mr-0.5 ml-2 h-5 w-5" aria-hidden="true" />
@@ -89,10 +89,13 @@ const Menu = ({
           slotProps={{
             root: {
               className: `
-                absolute
+                fixed
+                max-sm:bottom-16
+                sm:absolute
                 right-0
                 z-40
-                w-56
+                w-full
+                sm:w-56
                 origin-top-right
                 rounded-md
                 bg-white
