@@ -7,7 +7,15 @@ export interface MenuGroupProps {
 }
 
 const MenuGroup = ({ children }: MenuGroupProps) => {
-  return (
+  let disabled = false;
+
+  if (children instanceof Array<ReactNode>) {
+    disabled = !children.length;
+  } else {
+    disabled = !children;
+  }
+
+  return !disabled && (
     <div
       className="
         py-1

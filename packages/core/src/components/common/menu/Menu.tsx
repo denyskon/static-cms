@@ -89,13 +89,10 @@ const Menu = ({
           slotProps={{
             root: {
               className: `
-                fixed
-                max-sm:bottom-16
-                sm:absolute
+                absolute
                 right-0
                 z-40
-                w-full
-                sm:w-56
+                w-56
                 origin-top-right
                 rounded-md
                 bg-white

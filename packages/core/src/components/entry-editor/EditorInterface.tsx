@@ -22,6 +22,7 @@ import type {
   FieldsErrors,
   TranslatedProps,
 } from '@staticcms/core/interface';
+import { useMediaQuery } from 'react-responsive';
 
 const PREVIEW_VISIBLE = 'cms.preview-visible';
 const I18N_VISIBLE = 'cms.i18n-visible';
@@ -94,6 +95,8 @@ const EditorInterface = ({
   submitted,
   slug,
 }: TranslatedProps<EditorInterfaceProps>) => {
+  const isMobile = useMediaQuery({ maxWidth: 640 });
+
   const { locales, defaultLocale } = useMemo(() => getI18nInfo(collection), [collection]) ?? {};
   const [selectedLocale, setSelectedLocale] = useState<string>(locales?.[1] ?? 'en');
 
@@ -151,6 +154,10 @@ const EditorInterface = ({
       if (file?.editor?.frame !== undefined) {
         frame = file.editor.frame;
       }
+    }
+
+    if (isMobile) {
+      preview = false;
     }
 
     return [preview, frame];

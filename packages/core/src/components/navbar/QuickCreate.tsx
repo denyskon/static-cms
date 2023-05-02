@@ -1,4 +1,5 @@
 import { Add as AddIcon } from '@styled-icons/material/Add';
+import { AddCircleOutline as AddIconMobile } from '@styled-icons/material/AddCircleOutline';
 import React, { ComponentType, useMemo } from 'react';
 import { translate } from 'react-polyglot';
 
@@ -27,7 +28,7 @@ const QuickCreate = ({ isMobile = false, t }: TranslatedProps<QuickCreateProps>)
   );
 
   return (
-    <Menu label={!isMobile ? t('app.header.quickAdd') : null} startIcon={AddIcon} variant={isMobile ? 'text' : 'contained'} hideDropdownIcon={isMobile}>
+    <Menu label={!isMobile ? t('app.header.quickAdd') : null} startIcon={isMobile ? AddIconMobile : AddIcon} variant={isMobile ? 'text' : 'contained'} hideDropdownIcon={isMobile}>
       <MenuGroup>
         {createableCollections.map(collection => (
           <MenuItemLink key={collection.name} href={getNewEntryUrl(collection.name)}>

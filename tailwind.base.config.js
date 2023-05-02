@@ -4,7 +4,7 @@ module.exports = {
     extend: {
       height: {
         main: 'calc(100vh - 64px)',
-        'main-mobile': 'calc(100vh - 128px)',
+        'main-mobile': 'calc(100vh - 112px)',
         'media-library-dialog': '80vh',
         'media-card': '240px',
         'media-preview-image': '104px',

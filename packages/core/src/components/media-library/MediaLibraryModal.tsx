@@ -23,8 +23,10 @@ const MediaLibraryModal: FC = () => {
       open={isVisible}
       onClose={handleClose}
       className="
-        w-media-library-dialog
-        h-media-library-dialog
+        w-full
+        sm:w-media-library-dialog
+        h-full
+        sm:h-media-library-dialog
       "
     >
       <IconButton

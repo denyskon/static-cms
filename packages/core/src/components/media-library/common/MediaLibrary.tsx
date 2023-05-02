@@ -40,6 +40,7 @@ import MediaLibrarySearch from './MediaLibrarySearch';
 
 import type { MediaFile, TranslatedProps } from '@staticcms/core/interface';
 import type { ChangeEvent, FC, KeyboardEvent } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 /**
  * Extensions used to determine which files to show when the media library is
@@ -68,6 +69,8 @@ const MediaLibrary: FC<TranslatedProps<MediaLibraryProps>> = ({
   isDialog = false,
   t,
 }) => {
+  const isMobile = useMediaQuery({ maxWidth: 640 });
+
   const [currentFolder, setCurrentFolder] = useState<string | undefined>(undefined);
   const [selectedFile, setSelectedFile] = useState<MediaFile | null>(null);
   const [query, setQuery] = useState<string | undefined>(undefined);
@@ -492,9 +495,11 @@ const MediaLibrary: FC<TranslatedProps<MediaLibraryProps>> = ({
           className={classNames(
             `
               flex
+              flex-wrap
               items-center
               px-5
               pt-4
+              gap-3
             `,
             folderSupport &&
               `
@@ -505,8 +510,9 @@ const MediaLibrary: FC<TranslatedProps<MediaLibraryProps>> = ({
               `,
           )}
         >
-          <div className="flex flex-grow gap-3 mr-8">
-            <h2
+          <div className="flex flex-grow gap-3">
+            {!isMobile &&
+            (<h2
               className="
                 text-xl
                 font-semibold
@@ -521,7 +527,8 @@ const MediaLibrary: FC<TranslatedProps<MediaLibraryProps>> = ({
                 <PhotoIcon className="w-5 h-5" />
               </div>
               {t('app.header.media')}
-            </h2>
+            </h2>)
+            }
             <MediaLibrarySearch
               value={query}
               onChange={handleSearchChange}
@@ -561,7 +568,7 @@ const MediaLibrary: FC<TranslatedProps<MediaLibraryProps>> = ({
               </div>
             ) : null}
           </div>
-          <div className="flex gap-3 items-center relative z-20">
+          <div className="flex flex-grow gap-3 items-center relative z-20 justify-center">
             <FileUploadButton imagesOnly={forImage} onChange={handlePersist} />
             {canInsert ? (
               <Button

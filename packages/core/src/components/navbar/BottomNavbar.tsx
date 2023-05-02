@@ -40,9 +40,9 @@ const BottomNavbar = ({
   }, [dispatch]);
 
   return (
-    <nav className="bg-white dark:bg-slate-800 shadow-inner z-40 fixed bottom-0 left-0 right-0">
+    <nav className="bg-white dark:bg-slate-800 z-40 fixed bottom-0 left-0 right-0 border-t border-slate-200 dark:border-gray-700">
       <div key="nav" className="mx-auto pl-4 pr-4">
-        <div className="relative flex flex-wrap h-16 items-center grow">
+        <div className="relative flex flex-wrap h-12 items-center grow">
           <div className="flex grow gap-4 items-center justify-between">
             {showSidebarToggle ? (<Button variant='text' onClick={() => document.getElementById("sidebar")?.classList.toggle("hidden")}>
                 <MenuIcon className='h-5 w-8' />
