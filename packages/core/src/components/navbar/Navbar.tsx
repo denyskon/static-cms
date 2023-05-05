@@ -65,7 +65,7 @@ const Navbar = ({
                         {breadcrumb.name}
                       </Link>
                     ) : (
-                      <span key={`text-${index}`} className='text-ellipsis overflow-hidden'>{breadcrumb.name}</span>
+                      <span key={`text-${index}`} className='truncate'>{breadcrumb.name}</span>
                     )}
                   </Fragment>
                 ) : null,

@@ -15,6 +15,7 @@ import type { TranslatedProps } from '@staticcms/core/interface';
 import type { ComponentType, ReactNode } from 'react';
 
 export interface BottomNavbarProps {
+  toggleSidebar: () => void;
   showQuickCreate?: boolean;
   navbarActions?: ReactNode;
   showSidebarToggle?: boolean;
@@ -24,6 +25,7 @@ const BottomNavbar = ({
   showQuickCreate = false,
   navbarActions = null,
   showSidebarToggle=false,
+  toggleSidebar
 }: TranslatedProps<BottomNavbarProps>) => {
   const dispatch = useAppDispatch();
 
@@ -44,7 +46,7 @@ const BottomNavbar = ({
       <div key="nav" className="mx-auto pl-4 pr-4">
         <div className="relative flex flex-wrap h-12 items-center grow">
           <div className="flex grow gap-4 items-center justify-between">
-            {showSidebarToggle ? (<Button variant='text' onClick={() => document.getElementById("sidebar")?.classList.toggle("hidden")}>
+            {showSidebarToggle ? (<Button variant='text' onClick={toggleSidebar}>
                 <MenuIcon className='h-5 w-8' />
             </Button>) : null}
             {showQuickCreate ? <QuickCreate key="quick-create" isMobile /> : null}

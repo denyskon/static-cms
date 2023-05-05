@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import TopBarProgress from 'react-topbar-progress-indicator';
 
@@ -40,6 +40,16 @@ const MainView = ({
 }: MainViewProps) => {
   const isMobile = useMediaQuery({ maxWidth: 640 });
 
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
+
+  const handleToggleSidebar = useCallback(() => {
+    if (sidebarCollapsed) {
+      setSidebarCollapsed(false);
+    } else {
+      setSidebarCollapsed(true);
+    }
+  }, [sidebarCollapsed])
+
   return (
     <>
       <Navbar
@@ -49,7 +59,7 @@ const MainView = ({
         isMobile={isMobile}
       />
       <div className="flex bg-slate-50 dark:bg-slate-900">
-        {showLeftNav ? <Sidebar /> : null}
+        {showLeftNav ? <Sidebar collapseSidebar={() => setSidebarCollapsed(true)} isMobile={isMobile} sidebarCollapsed={sidebarCollapsed} /> : null}
         <div
           className={classNames(
             showLeftNav && !isMobile ? 'w-main left-64' : 'w-full',
@@ -70,6 +80,7 @@ const MainView = ({
         showQuickCreate={showQuickCreate}
         navbarActions={navbarActions}
         showSidebarToggle={showLeftNav}
+        toggleSidebar={handleToggleSidebar}
       /> : null}
     </>
   );

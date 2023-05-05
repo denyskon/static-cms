@@ -1,4 +1,5 @@
 import { ArrowUpward as UpwardIcon } from '@styled-icons/material/ArrowUpward';
+import { Close as CloseIcon } from '@styled-icons/material/Close';
 import { CreateNewFolder as NewFolderIcon } from '@styled-icons/material/CreateNewFolder';
 import { FolderOpen as FolderOpenIcon } from '@styled-icons/material/FolderOpen';
 import { Home as HomeIcon } from '@styled-icons/material/Home';
@@ -62,11 +63,13 @@ const IMAGE_EXTENSIONS = [...IMAGE_EXTENSIONS_VIEWABLE];
 interface MediaLibraryProps {
   canInsert?: boolean;
   isDialog?: boolean;
+  closeDialog?: () => void;
 }
 
 const MediaLibrary: FC<TranslatedProps<MediaLibraryProps>> = ({
   canInsert = false,
   isDialog = false,
+  closeDialog,
   t,
 }) => {
   const isMobile = useMediaQuery({ maxWidth: 640 });
@@ -497,7 +500,7 @@ const MediaLibrary: FC<TranslatedProps<MediaLibraryProps>> = ({
               flex
               flex-wrap
               items-center
-              px-5
+              px-4
               pt-4
               gap-3
             `,
@@ -511,6 +514,23 @@ const MediaLibrary: FC<TranslatedProps<MediaLibraryProps>> = ({
           )}
         >
           <div className="flex flex-grow gap-3">
+            {isDialog ?
+            (<IconButton
+                className="
+                    bg-white
+                    hover:bg-gray-100
+                    dark:bg-slate-800
+                    dark:hover:bg-slate-900
+                  "
+                variant="outlined"
+                aria-label="add"
+                onClick={closeDialog}
+                rounded
+              >
+                <CloseIcon className="w-5 h-5" />
+            </IconButton>) 
+            : null
+            }
             {!isMobile &&
             (<h2
               className="
@@ -568,7 +588,7 @@ const MediaLibrary: FC<TranslatedProps<MediaLibraryProps>> = ({
               </div>
             ) : null}
           </div>
-          <div className="flex flex-grow gap-3 items-center relative z-20 justify-center">
+          <div className="flex flex-grow gap-3 items-center relative z-20 justify-center sm:justify-end">
             <FileUploadButton imagesOnly={forImage} onChange={handlePersist} />
             {canInsert ? (
               <Button

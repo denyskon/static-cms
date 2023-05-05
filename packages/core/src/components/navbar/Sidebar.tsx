@@ -1,5 +1,5 @@
 import { Photo as PhotoIcon } from '@styled-icons/material/Photo';
-import React, { useCallback, useMemo } from 'react';
+import React, { ComponentType, useCallback, useMemo } from 'react';
 import { translate } from 'react-polyglot';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -13,12 +13,15 @@ import CollectionSearch from '../collections/CollectionSearch';
 import NestedCollection from '../collections/NestedCollection';
 import NavLink from './NavLink';
 
-import type { Collection } from '@staticcms/core/interface';
-import type { FC } from 'react';
+import type { Collection, TranslatedProps } from '@staticcms/core/interface';
 
-import type { TranslateProps } from 'react-polyglot';
+export interface SidebarProps {
+  collapseSidebar: () => void;
+  isMobile?: boolean;
+  sidebarCollapsed?: boolean;
+} 
 
-const Sidebar: FC<TranslateProps> = ({ t }) => {
+const Sidebar = ({ isMobile = false, sidebarCollapsed = true, collapseSidebar, t }: TranslatedProps<SidebarProps>) => {
   const { name, searchTerm, ...params } = useParams();
   const filterTerm = useMemo(() => params['*'] ?? '', [params]);
 
@@ -51,7 +54,7 @@ const Sidebar: FC<TranslateProps> = ({ t }) => {
           }
 
           return (
-            <NavLink key={collectionName} to={`/collections/${collectionName}`} icon={icon}>
+            <NavLink key={collectionName} to={`/collections/${collectionName}`} icon={icon} onClick={collapseSidebar}>
               {collection.label}
             </NavLink>
           );
@@ -100,7 +103,8 @@ const Sidebar: FC<TranslateProps> = ({ t }) => {
       id='sidebar'
       className={classNames(
         'w-sidebar-expanded',
-        'h-main-mobile sm:h-main hidden sm:block fixed z-30 shadow-sidebar lg:block lg:z-auto lg:shadow-none',
+        'h-main-mobile sm:h-main sm:block fixed z-30 shadow-sidebar lg:block lg:z-auto lg:shadow-none',
+        isMobile && sidebarCollapsed ? 'hidden' : null,
       )}
       aria-label="Sidebar"
     >
@@ -138,4 +142,4 @@ const Sidebar: FC<TranslateProps> = ({ t }) => {
   );
 };
 
-export default translate()(Sidebar) as FC;
+export default translate()(Sidebar) as ComponentType<SidebarProps>;

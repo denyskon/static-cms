@@ -23,30 +23,15 @@ const MediaLibraryModal: FC = () => {
       open={isVisible}
       onClose={handleClose}
       className="
+        rounded-none
+        sm:rounded-lg
         w-full
         sm:w-media-library-dialog
         h-full
         sm:h-media-library-dialog
       "
     >
-      <IconButton
-        className="
-            absolute
-            -top-3.5
-            -left-3.5
-            bg-white
-            hover:bg-gray-100
-            dark:bg-slate-800
-            dark:hover:bg-slate-900
-          "
-        variant="outlined"
-        aria-label="add"
-        onClick={handleClose}
-        rounded
-      >
-        <CloseIcon className="w-5 h-5" />
-      </IconButton>
-      <MediaLibrary canInsert isDialog />
+      <MediaLibrary canInsert isDialog closeDialog={handleClose} />
     </Modal>
   );
 };
